@@ -13,7 +13,7 @@ class Dice {
     }
 
     init() {
-        this.cube.style.transition = `${this.duration}ms ease-in-out`;
+        this.cube.style.transition = `transform ${this.duration}ms ease-in-out`;
         requestAnimationFrame(() => {
             this.cube.style.transform = this.transform;
         });
@@ -25,9 +25,8 @@ class Dice {
             if (this.isRolling) {
                 return;
             }
-            this.duration = 4000;
             this.isRolling = true;
-            this.cube.style.transition = `${this.duration}ms ease-in-out`;
+            this.cube.style.transition = `transform ${this.duration}ms ease-in-out`;
             this.currentRoll = randomChoice([1, 2, 3, 4, 5, 6]);
             this.calculateDegrees(this.currentRoll);
             requestAnimationFrame(() => {

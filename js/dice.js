@@ -1,7 +1,8 @@
 const MAX_ROT = 5;
 const MIN_ROT = 4;
-const LONG_DURATION = 4000;
 const SHORT_DURATION = 500;
+MAX_DICES = 6;
+MIN_DICES = 1;
 
 let isDark;
 const dices = [];
@@ -46,7 +47,6 @@ function keyPressed(key) {
 
 // keypress events
 document.addEventListener('keydown', function (event) {
-    // if any of the dices have `isRolling`, return
     if (dices.some((dice) => dice.isRolling)) {
         return;
     }
@@ -61,6 +61,12 @@ function updateThemeIcon() {
         document.getElementById('sun-svg').content.cloneNode(true));
 }
 
+function updateButtons() {
+    document.getElementById('add-dice').disabled = dices.length >= MAX_DICES;
+    document.getElementById('remove-dice').disabled = dices.length <= MIN_DICES;
+    localStorage.setItem('dice-count', dices.length.toString());
+}
+
 function themeInit() {
     isDark = localStorage.getItem('theme') === null ?
         window.matchMedia('(prefers-color-scheme: dark)').matches :
@@ -71,8 +77,7 @@ function themeInit() {
 }
 
 function initEvents() {
-    const themeButton = document.getElementById('theme-switch');
-    themeButton.addEventListener('click', () => {
+    document.getElementById('theme-switch').addEventListener('click', () => {
         const root = document.querySelector(':root');
         root.style.setProperty('--transition-duration', '0.5s');
 
@@ -86,18 +91,50 @@ function initEvents() {
             root.style.setProperty('--transition-duration', '0.2s');
         }, 500);
     });
+
+    document.getElementById('roll-dice').addEventListener('click', () => {
+        dices.forEach((dice) => {
+            dice.cube.dispatchEvent(new Event('click'));
+        });
+    });
+
+    document.getElementById('add-dice').addEventListener('click', () => {
+        if (dices.length >= MAX_DICES) {
+            return;
+        }
+        dices.push(new Dice());
+        document.getElementById('dice-container').appendChild(dices.at(-1).cubeContainer);
+        updateButtons();
+    });
+
+    document.getElementById('remove-dice').addEventListener('click', () => {
+        if (dices.length <= MIN_DICES) {
+            return;
+        }
+        document.getElementById('dice-container').removeChild(dices.at(-1).cubeContainer);
+        dices.pop();
+        updateButtons();
+    });
+}
+
+function dicesInit() {
+    const diceCount = localStorage.getItem('dice-count') || 1;
+    if (diceCount) {
+        for (let i = 0; i < Number(diceCount); i++) {
+            dices.push(new Dice());
+        }
+    }
+    dices.forEach((dice) => {
+        document.getElementById('dice-container').appendChild(dice.cubeContainer);
+    });
 }
 
 function init() {
     themeInit();
     initEvents();
+    dicesInit();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     init();
-    dices.push(new Dice());
-    dices.push(new Dice());
-    dices.forEach((dice) => {
-        document.getElementById('dice-container').appendChild(dice.cubeContainer);
-    });
 });

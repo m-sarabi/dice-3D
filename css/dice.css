@@ -1,4 +1,8 @@
 :root {
+    --button-bg-color: #28f;
+    --button-fg-color: #eee;
+    --button-hover-color: #17c;
+
     --cube-size: 200px;
     --transition-duration: 0.2s;
 }
@@ -26,18 +30,68 @@ body.light-mode {
 body {
     background-color: var(--bg-main-color);
     color: var(--fg-color);
-    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+    transition: background-color var(--transition-duration) ease-in-out, color var(--transition-duration) ease-in-out;
 }
 
-object {
-    pointer-events: none;
+button.primary {
+    background-color: var(--button-bg-color);
+    color: var(--button-fg-color);
+    font-size: 16px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 24px;
+    cursor: pointer;
+    will-change: background-color, transform;
+    transition: background-color var(--transition-duration) ease-in-out;
+}
+
+button.primary:hover {
+    background-color: var(--button-hover-color);
+}
+
+button.primary:active {
+    transform: scale(0.98);
+}
+
+button.secondary {
+    background-color: var(--button-bg-color);
+    height: 40px;
+    width: 40px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: background-color, transform;
+    transition: background-color var(--transition-duration) ease-in-out;
+}
+
+button.secondary:hover {
+    background-color: var(--button-hover-color);
+}
+
+button.secondary:active {
+    transform: scale(0.98);
+}
+
+button.secondary svg {
+    stroke: var(--button-fg-color);
+    width: 90%;
+    height: 90%;
+}
+
+button.secondary:disabled {
+    cursor: not-allowed;
+    background-color: var(--button-bg-color);
+    opacity: 0.5;
 }
 
 .cube-container {
     position: relative;
     width: calc(var(--cube-size) * 2);
     height: calc(var(--cube-size) * 2);
-    margin: 20px auto;
     perspective: 1000px;
 }
 
@@ -140,6 +194,21 @@ object {
     background-color: var(--bg-secondary-color);
 }
 
+#controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    border-radius: 10px;
+    padding: 10px;
+    height: fit-content;
+    margin: 10px auto;
+    gap: 10px;
+    background-color: var(--bg-secondary-color);
+    transition: background-color var(--transition-duration) ease-in-out;
+}
+
 .icon {
     width: 100%;
     height: 100%;
@@ -157,8 +226,12 @@ object {
     }
 
     #theme-switch {
-        width: 4rem;
-        height: 4rem;
+        width: 3rem;
+        height: 3rem;
+    }
+
+    :root {
+        --cube-size: 100px;
     }
 
 }

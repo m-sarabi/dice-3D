@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dice</title>
     <link rel="stylesheet" href="css/dice.css">
 </head>
@@ -40,6 +42,24 @@
     </svg>
 </template>
 
+<div id="controls">
+    <button id="roll-dice" type="button" class="primary">Roll</button>
+    <button id="add-dice" type="button" class="secondary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+    </button>
+    <button id="remove-dice" type="button" class="secondary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="feather feather-minus">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+    </button>
+</div>
 <div id="dice-container"></div>
 
 <button id="theme-switch" type="button">

@@ -36,7 +36,6 @@ class Dice {
             setTimeout(() => {
                 this.isRolling = false;
             }, this.duration);
-            console.log(this.currentRoll, this.degrees);
         });
         this.swipeStartEvent();
         this.swipeEndEvent();
@@ -47,14 +46,12 @@ class Dice {
             event.preventDefault();
             swiping = true;
             this.touchStart = [event.changedTouches[0].screenX, event.changedTouches[0].screenY];
-            console.log(this.touchStart);
         });
     }
 
     swipeEndEvent() {
         this.cubeContainer.addEventListener('touchend', (event) => {
             if (swiping === true) {
-                console.log(this.touchStart);
                 this.touchEnd = [event.changedTouches[0].screenX, event.changedTouches[0].screenY];
                 this.swipeRotate();
             }

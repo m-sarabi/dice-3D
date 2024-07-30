@@ -40,7 +40,6 @@ function keyPressed(key) {
             dice.degrees.forEach((degree, index) => {
                 dice.degrees[index] += rotations[index];
             });
-            console.log(rotations);
             dice.cube.style.transform = `rotateX(${dice.degrees[0]}deg) rotateY(${dice.degrees[1]}deg) rotateZ(${dice.degrees[2]}deg)`;
         });
     }
@@ -55,28 +54,36 @@ document.addEventListener('keydown', function (event) {
     keyPressed(event.key);
 });
 
-function themeHandler() {
-    isDark = localStorage.getItem('theme') === 'dark-mode';
+function updateThemeIcon() {
+    const themeButton = document.getElementById('theme-switch');
+    themeButton.innerHTML = '';
+    themeButton.appendChild(isDark ?
+        document.getElementById('sun-svg').content.cloneNode(true) :
+        document.getElementById('moon-svg').content.cloneNode(true));
+}
 
+function themeInit() {
+    isDark = localStorage.getItem('theme') === null ?
+        window.matchMedia('(prefers-color-scheme: dark)').matches :
+        localStorage.getItem('theme') === 'dark-mode';
     document.body.classList.toggle('dark-mode', isDark);
     document.body.classList.toggle('light-mode', !isDark);
-
-    // temp: Temporary change theme button
-    document.getElementById('theme-switch').addEventListener('click', () => {
-        console.log(isDark);
-        isDark = !document.body.classList.contains('dark-mode');
-        document.body.classList.toggle('dark-mode', isDark);
-        document.body.classList.toggle('light-mode', !isDark);
-
-        localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode');
-    });
+    updateThemeIcon();
 }
 
 function initEvents() {
-    themeHandler();
+    const themeButton = document.getElementById('theme-switch');
+    themeButton.addEventListener('click', () => {
+        isDark = !document.body.classList.contains('dark-mode');
+        document.body.classList.toggle('dark-mode', isDark);
+        document.body.classList.toggle('light-mode', !isDark);
+        localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode');
+        updateThemeIcon();
+    });
 }
 
 function init() {
+    themeInit();
     initEvents();
 }
 
@@ -85,8 +92,8 @@ document.addEventListener('DOMContentLoaded', () => {
     dices.push(new Dice());
     dices.push(new Dice());
     dices.forEach((dice) => {
-        document.body.appendChild(dice.cubeContainer);
+        document.getElementById('dice-container').appendChild(dice.cubeContainer);
     });
 
-    const root = document.querySelector(':root');
+    // const root = document.querySelector(':root');
 });

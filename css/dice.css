@@ -3,7 +3,7 @@
     --button-fg-color: #eee;
     --button-hover-color: #17c;
 
-    --cube-size: 200px;
+    --cube-size: min(15vh, 15vw);
     --transition-duration: 0.2s;
 }
 
@@ -218,11 +218,11 @@ button.secondary:disabled {
 
 @media (max-width: 768px) {
     body {
-        padding: 30px;
+        padding: 2%;
     }
 
     #dice-container {
-        width: calc(100% - 20px);
+        width: 95%;
     }
 
     #theme-switch {
@@ -231,7 +231,7 @@ button.secondary:disabled {
     }
 
     :root {
-        --cube-size: 100px;
+        --cube-size: min(20vw, 20vh);
     }
 
 }

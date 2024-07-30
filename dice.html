@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dice</title>
+    <link rel="stylesheet" href="css/dice.css">
+</head>
+<body class="dark-mode">
+
+<template id="dice-template">
+    <section class="cube-container">
+        <div class="cube">
+            <div class="side1 side"></div>
+            <div class="side2 side"></div>
+            <div class="side3 side"></div>
+            <div class="side4 side"></div>
+            <div class="side5 side"></div>
+            <div class="side6 side"></div>
+        </div>
+    </section>
+</template>
+
+<button id="theme-switch">
+    <img src="./assets/moon.svg" alt="dark mode">
+</button>
+<!--<section class="cube-container">-->
+<!--    <div class="cube">-->
+<!--        <div class="side1 side"></div>-->
+<!--        <div class="side2 side"></div>-->
+<!--        <div class="side3 side"></div>-->
+<!--        <div class="side4 side"></div>-->
+<!--        <div class="side5 side"></div>-->
+<!--        <div class="side6 side"></div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--<section class="result-container">-->
+<!--    <span class="result">0</span>-->
+<!--</section>-->
+
+<div id="debug" style="position: fixed; left: 10px; top: 50px">
+    <label for="x-degree">X: </label><input type="number" id="x-degree">
+    <label for="y-degree">Y: </label><input type="number" id="y-degree">
+    <label for="z-degree">Z: </label><input type="number" id="z-degree">
+    <label for="size">Size: </label><input type="number" id="size" value="200">
+</div>
+<script src="js/dice.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/classes.js"></script>
+</body>
+</html>

@@ -8,8 +8,6 @@ const dices = [];
 
 let swiping = false;
 
-let lastClicked = Date.now() - LONG_DURATION;
-
 // handling arrow keys
 function keyPressed(key) {
     let dif = 15;
@@ -36,7 +34,7 @@ function keyPressed(key) {
     }
     if (['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', '+', '-'].includes(key)) {
         dices.forEach((dice) => {
-            dice.cube.style.transition = SHORT_DURATION + 'ms ease-in-out';
+            dice.cube.style.transition = `transform ${SHORT_DURATION}ms ease-in-out`;
             dice.degrees.forEach((degree, index) => {
                 dice.degrees[index] += rotations[index];
             });
@@ -48,7 +46,8 @@ function keyPressed(key) {
 
 // keypress events
 document.addEventListener('keydown', function (event) {
-    if (event.repeat || Date.now() - lastClicked <= LONG_DURATION) {
+    // if any of the dices have `isRolling`, return
+    if (dices.some((dice) => dice.isRolling)) {
         return;
     }
     keyPressed(event.key);
@@ -74,11 +73,18 @@ function themeInit() {
 function initEvents() {
     const themeButton = document.getElementById('theme-switch');
     themeButton.addEventListener('click', () => {
+        const root = document.querySelector(':root');
+        root.style.setProperty('--transition-duration', '0.5s');
+
         isDark = !document.body.classList.contains('dark-mode');
         document.body.classList.toggle('dark-mode', isDark);
         document.body.classList.toggle('light-mode', !isDark);
         localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode');
         updateThemeIcon();
+
+        setTimeout(() => {
+            root.style.setProperty('--transition-duration', '0.2s');
+        }, 500);
     });
 }
 
@@ -94,6 +100,4 @@ document.addEventListener('DOMContentLoaded', () => {
     dices.forEach((dice) => {
         document.getElementById('dice-container').appendChild(dice.cubeContainer);
     });
-
-    // const root = document.querySelector(':root');
 });

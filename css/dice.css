@@ -1,5 +1,10 @@
 :root {
     --cube-size: 200px;
+    --transition-duration: 0.2s;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body.dark-mode {
@@ -32,12 +37,11 @@ object {
     position: relative;
     width: calc(var(--cube-size) * 2);
     height: calc(var(--cube-size) * 2);
-    margin: 20px auto 0;
+    margin: 20px auto;
     perspective: 1000px;
 }
 
 .cube {
-    /*perspective-origin: 200px 200px;*/
     position: relative;
     transform: rotateX(0deg) rotateY(0deg);
     transform-origin: var(--cube-size) var(--cube-size);

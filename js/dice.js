@@ -57,8 +57,8 @@ function updateThemeIcon() {
     const themeButton = document.getElementById('theme-switch');
     themeButton.innerHTML = '';
     themeButton.appendChild(isDark ?
-        document.getElementById('sun-svg').content.cloneNode(true) :
-        document.getElementById('moon-svg').content.cloneNode(true));
+        document.getElementById('moon-svg').content.cloneNode(true) :
+        document.getElementById('sun-svg').content.cloneNode(true));
 }
 
 function themeInit() {

@@ -76,7 +76,7 @@ function updateDiceSize(change = 0) {
     console.log(currentSize);
     document.getElementById('zoom-in').disabled = currentSize >= MAX_ZOOM;
     document.getElementById('zoom-out').disabled = currentSize <= MIN_ZOOM;
-    if (currentSize >= MAX_ZOOM || currentSize <= MIN_ZOOM) return;
+    if (currentSize > MAX_ZOOM || currentSize < MIN_ZOOM) return;
     localStorage.setItem('cube-size', currentSize.toString());
     root.style.setProperty('--cube-size', `min(${currentSize}vh, ${currentSize}vw)`);
 }

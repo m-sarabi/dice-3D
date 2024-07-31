@@ -90,15 +90,16 @@ button.secondary:disabled {
 
 .cube-container {
     position: relative;
-    width: calc(var(--cube-size) * 2);
-    height: calc(var(--cube-size) * 2);
+    width: calc(var(--cube-size) * 1.5);
+    height: calc(var(--cube-size) * 1.5);
     perspective: 1000px;
+    margin: calc(var(--cube-size) / 10);
 }
 
 .cube {
     position: relative;
     transform: rotateX(0deg) rotateY(0deg);
-    transform-origin: var(--cube-size) var(--cube-size);
+    transform-origin: calc(var(--cube-size) * 3 / 4) calc(var(--cube-size) * 3 / 4);
     transform-style: preserve-3d;
 }
 
@@ -108,8 +109,8 @@ button.secondary:disabled {
 
 .side {
     position: absolute;
-    top: calc(var(--cube-size) / 2);
-    left: calc(var(--cube-size) / 2);
+    top: calc(var(--cube-size) / 4);
+    left: calc(var(--cube-size) / 4);
     width: var(--cube-size);
     height: var(--cube-size);
     background-color: #aef;
@@ -168,6 +169,7 @@ button.secondary:disabled {
     flex-wrap: wrap;
     justify-content: center;
     width: 70%;
+    padding: calc(var(--cube-size) / 10);
     height: fit-content;
     background-color: var(--bg-secondary-color);
     margin: 10px auto;

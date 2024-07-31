@@ -93,6 +93,9 @@ function initEvents() {
     });
 
     document.getElementById('roll-dice').addEventListener('click', () => {
+        if (dices.some((dice) => dice.isRolling)) {
+            return;
+        }
         dices.forEach((dice) => {
             dice.cube.dispatchEvent(new Event('click'));
         });

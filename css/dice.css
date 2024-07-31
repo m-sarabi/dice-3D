@@ -88,6 +88,21 @@ button.secondary:disabled {
     opacity: 0.5;
 }
 
+button.side-button {
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: var(--bg-main-color);
+    transition: background-color var(--transition-duration) ease-in-out, border var(--transition-duration) ease-in-out;
+}
+
+button.side-button:hover {
+    background-color: var(--bg-secondary-color);
+}
+
 .cube-container {
     position: relative;
     width: calc(var(--cube-size) * 1.5);
@@ -182,18 +197,6 @@ button.secondary:disabled {
     right: 10px;
     width: 50px;
     height: 50px;
-    border: 2px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    cursor: pointer;
-    background-color: var(--bg-main-color);
-    transition: background-color var(--transition-duration) ease-in-out, border var(--transition-duration) ease-in-out;
-}
-
-#theme-switch:hover {
-    background-color: var(--bg-secondary-color);
 }
 
 #controls {

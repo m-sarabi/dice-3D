@@ -66,25 +66,25 @@ function updateThemeIcon() {
 function updateMainButtons() {
     document.getElementById('add-dice').disabled = dices.length >= MAX_DICES;
     document.getElementById('remove-dice').disabled = dices.length <= MIN_DICES;
-    localStorage.setItem('dice-count', dices.length.toString());
+    localStorage.setItem('dice-3d-dices', dices.length.toString());
 }
 
 function updateDiceSize(change = 0) {
     const root = document.querySelector(':root');
-    let currentSize = localStorage.getItem('cube-size') || '15';
+    let currentSize = localStorage.getItem('dice-3d-size') || '15';
     currentSize = Number(currentSize) + change;
     console.log(currentSize);
     document.getElementById('zoom-in').disabled = currentSize >= MAX_ZOOM;
     document.getElementById('zoom-out').disabled = currentSize <= MIN_ZOOM;
     if (currentSize > MAX_ZOOM || currentSize < MIN_ZOOM) return;
-    localStorage.setItem('cube-size', currentSize.toString());
+    localStorage.setItem('dice-3d-size', currentSize.toString());
     root.style.setProperty('--cube-size', `min(${currentSize}vh, ${currentSize}vw)`);
 }
 
 function themeInit() {
-    isDark = localStorage.getItem('theme') === null ?
+    isDark = localStorage.getItem('dice-3d-theme') === null ?
         window.matchMedia('(prefers-color-scheme: dark)').matches :
-        localStorage.getItem('theme') === 'dark-mode';
+        localStorage.getItem('dice-3d-theme') === 'dark-mode';
     document.body.classList.toggle('dark-mode', isDark);
     document.body.classList.toggle('light-mode', !isDark);
     updateThemeIcon();
@@ -98,7 +98,7 @@ function initEvents() {
         isDark = !document.body.classList.contains('dark-mode');
         document.body.classList.toggle('dark-mode', isDark);
         document.body.classList.toggle('light-mode', !isDark);
-        localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode');
+        localStorage.setItem('dice-3d-theme', document.body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode');
         updateThemeIcon();
 
         setTimeout(() => {
@@ -143,7 +143,7 @@ function initEvents() {
 }
 
 function dicesInit() {
-    const diceCount = localStorage.getItem('dice-count') || 1;
+    const diceCount = localStorage.getItem('dice-3d-dices') || 1;
     if (diceCount) {
         for (let i = 0; i < Number(diceCount); i++) {
             dices.push(new Dice());

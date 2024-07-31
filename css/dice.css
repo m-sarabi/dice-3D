@@ -103,6 +103,16 @@ button.side-button:hover {
     background-color: var(--bg-secondary-color);
 }
 
+button.side-button:active {
+    transform: scale(0.98);
+}
+
+button.side-button:disabled {
+    cursor: not-allowed;
+    background-color: var(--bg-main-color);
+    opacity: 0.5;
+}
+
 .cube-container {
     position: relative;
     width: calc(var(--cube-size) * 1.5);
@@ -199,6 +209,21 @@ button.side-button:hover {
     height: 50px;
 }
 
+#zoom-in, #zoom-out {
+    position: absolute;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+}
+
+#zoom-in {
+    top: 65px;
+}
+
+#zoom-out {
+    top: 110px;
+}
+
 #controls {
     display: flex;
     flex-direction: row;
@@ -235,8 +260,9 @@ button.side-button:hover {
         height: 3rem;
     }
 
-    :root {
-        --cube-size: min(20vw, 20vh);
+    #zoom-in, #zoom-out {
+        width: 2.5rem;
+        height: 2.5rem;
     }
 
 }

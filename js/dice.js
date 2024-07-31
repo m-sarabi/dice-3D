@@ -1,8 +1,10 @@
 const MAX_ROT = 5;
 const MIN_ROT = 4;
 const SHORT_DURATION = 500;
-MAX_DICES = 6;
-MIN_DICES = 1;
+const MAX_DICES = 6;
+const MIN_DICES = 1;
+const MAX_ZOOM = 30;
+const MIN_ZOOM = 5;
 
 let isDark;
 const dices = [];
@@ -61,10 +63,22 @@ function updateThemeIcon() {
         document.getElementById('sun-svg').content.cloneNode(true));
 }
 
-function updateButtons() {
+function updateMainButtons() {
     document.getElementById('add-dice').disabled = dices.length >= MAX_DICES;
     document.getElementById('remove-dice').disabled = dices.length <= MIN_DICES;
     localStorage.setItem('dice-count', dices.length.toString());
+}
+
+function updateDiceSize(change = 0) {
+    const root = document.querySelector(':root');
+    let currentSize = localStorage.getItem('cube-size') || '15';
+    currentSize = Number(currentSize) + change;
+    console.log(currentSize);
+    document.getElementById('zoom-in').disabled = currentSize >= MAX_ZOOM;
+    document.getElementById('zoom-out').disabled = currentSize <= MIN_ZOOM;
+    if (currentSize >= MAX_ZOOM || currentSize <= MIN_ZOOM) return;
+    localStorage.setItem('cube-size', currentSize.toString());
+    root.style.setProperty('--cube-size', `min(${currentSize}vh, ${currentSize}vw)`);
 }
 
 function themeInit() {
@@ -107,7 +121,7 @@ function initEvents() {
         }
         dices.push(new Dice());
         document.getElementById('dice-container').appendChild(dices.at(-1).cubeContainer);
-        updateButtons();
+        updateMainButtons();
     });
 
     document.getElementById('remove-dice').addEventListener('click', () => {
@@ -116,7 +130,15 @@ function initEvents() {
         }
         document.getElementById('dice-container').removeChild(dices.at(-1).cubeContainer);
         dices.pop();
-        updateButtons();
+        updateMainButtons();
+    });
+
+    document.getElementById('zoom-in').addEventListener('click', () => {
+        updateDiceSize(1);
+    });
+
+    document.getElementById('zoom-out').addEventListener('click', () => {
+        updateDiceSize(-1);
     });
 }
 
@@ -130,6 +152,8 @@ function dicesInit() {
     dices.forEach((dice) => {
         document.getElementById('dice-container').appendChild(dice.cubeContainer);
     });
+    updateDiceSize();
+    updateMainButtons();
 }
 
 function init() {
